@@ -1,0 +1,247 @@
+#{extends 'main.html' /}
+#{set title:'Avalia��es' /}
+
+<style>
+    body {
+        background: #fef5f8;
+    }
+
+    .container {
+        max-width: 1200px;
+        margin: 40px auto;
+        padding: 20px;
+    }
+
+    .page-title {
+        text-align: center;
+        font-size: 2.5rem;
+        color: #c44569;
+        margin-bottom: 30px;
+        font-weight: 700;
+    }
+
+    .page-title i {
+        color: #ff6b9d;
+    }
+
+    .search-form {
+        display: flex;
+        gap: 15px;
+        justify-content: center;
+        margin-bottom: 40px;
+        flex-wrap: wrap;
+    }
+
+    .search-input {
+        padding: 15px 25px;
+        border: 2px solid #ffe0ec;
+        border-radius: 25px;
+        font-size: 1rem;
+        width: 400px;
+        max-width: 100%;
+        font-family: 'Poppins', sans-serif;
+        transition: all 0.3s;
+        background: white;
+    }
+
+    .search-input:focus {
+        outline: none;
+        border-color: #ff6b9d;
+        box-shadow: 0 0 0 3px rgba(255, 107, 157, 0.1);
+    }
+
+    .search-button {
+        padding: 15px 35px;
+        background: linear-gradient(135deg, #ff6b9d 0%, #c44569 100%);
+        color: white;
+        border: none;
+        border-radius: 25px;
+        font-weight: 600;
+        cursor: pointer;
+        font-family: 'Poppins', sans-serif;
+        transition: all 0.3s;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+
+    .search-button:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 8px 20px rgba(255, 107, 157, 0.3);
+    }
+
+    .reviews-list {
+        display: grid;
+        gap: 25px;
+    }
+
+    .review-card {
+        background: white;
+        padding: 30px;
+        border-radius: 15px;
+        box-shadow: 0 5px 20px rgba(196, 69, 105, 0.1);
+        transition: all 0.3s;
+        border-left: 4px solid #ff6b9d;
+    }
+
+    .review-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 30px rgba(196, 69, 105, 0.2);
+    }
+
+    .review-author {
+        color: #ff6b9d;
+        font-size: 1.3rem;
+        margin-bottom: 15px;
+        font-weight: 600;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .review-author i {
+        font-size: 1.5rem;
+    }
+
+    .review-text {
+        color: #666;
+        line-height: 1.8;
+        margin-bottom: 20px;
+        font-style: italic;
+        font-size: 1rem;
+    }
+
+    .review-card > p {
+        margin-bottom: 20px;
+        color: #555;
+    }
+
+    .review-card strong {
+        color: #c44569;
+        font-weight: 600;
+    }
+
+    .review-actions {
+        display: flex;
+        gap: 10px;
+        margin-top: 15px;
+        padding-top: 15px;
+        border-top: 1px solid #ffe0ec;
+    }
+
+    .btn-edit, .btn-delete {
+        padding: 10px 20px;
+        border-radius: 8px;
+        text-decoration: none;
+        font-weight: 500;
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        transition: all 0.3s;
+        font-size: 0.95rem;
+    }
+
+    .btn-edit {
+        background: #ff6b9d;
+        color: white;
+    }
+
+    .btn-edit:hover {
+        background: #ff5a8c;
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(255, 107, 157, 0.3);
+    }
+
+    .btn-delete {
+        background: #c44569;
+        color: white;
+    }
+
+    .btn-delete:hover {
+        background: #b33558;
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(196, 69, 105, 0.3);
+    }
+
+    .empty-state {
+        text-align: center;
+        padding: 60px 20px;
+        background: white;
+        border-radius: 15px;
+        box-shadow: 0 5px 20px rgba(196, 69, 105, 0.1);
+    }
+
+    .empty-state i {
+        font-size: 4rem;
+        color: #ffc0cb;
+        margin-bottom: 20px;
+    }
+
+    .empty-state p {
+        color: #999;
+        font-size: 1.1rem;
+    }
+
+    @media (max-width: 768px) {
+        .search-form {
+            flex-direction: column;
+            align-items: stretch;
+        }
+
+        .search-input {
+            width: 100%;
+        }
+
+        .review-actions {
+            flex-direction: column;
+        }
+
+        .btn-edit, .btn-delete {
+            width: 100%;
+            justify-content: center;
+        }
+    }
+</style>
+
+<div class="container">
+    <h1 class="page-title">
+        <i class='bx bxs-star'></i>Avaliações de Clientes
+    </h1>
+
+    <form action="@{Compras.avaliacoes}" method="GET" class="search-form">
+        <input type="text" name="busca" class="search-input"
+               placeholder="Pesquisar por nome ou mensagem..."
+               value="${busca}">
+        <button type="submit" class="search-button">
+            <i class='bx bx-search'></i> Buscar
+        </button>
+    </form>
+
+    <div class="reviews-list">
+        #{list items:avaliacao, as:'item'}
+            <div class="review-card">
+                <h3 class="review-author">
+                    <i class='bx bx-user-circle'></i> ${item.usuario}
+                </h3>
+                <p class="review-text">"${item.mensagem}"</p>
+                <p><strong>Produto:</strong> ${item.produto.nome}</p>
+
+                <div class="review-actions">
+                    <a href="@{Compras.editaravaliacao(item.id)}" class="btn-edit">
+                        <i class='bx bx-edit'></i> Editar
+                    </a>
+                    <a href="@{Compras.deletar(item.id)}" class="btn-delete" 
+                       onclick="return confirm('Deseja realmente excluir esta avalia��o de ${item.usuario}?')">
+                        <i class='bx bx-trash'></i> Excluir
+                    </a>
+                </div>
+            </div>
+        #{/list}
+        #{else}
+            <div class="empty-state">
+                <i class='bx bx-search-alt'></i>
+                <p>Nenhuma avaliação encontrada.</p>
+            </div>
+        #{/else}
+    </div>
+</div>

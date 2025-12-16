@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Login - Nêga Biju</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            /* Fundo Rosa Gradiente igual ao Hero da Home */
+            background: linear-gradient(135deg, #ff6b9d 0%, #c44569 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .login-container {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 15px 40px rgba(196, 69, 105, 0.25); /* Sombra rosada */
+            overflow: hidden;
+            max-width: 450px;
+            width: 100%;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .login-header {
+            /* Cabeçalho branco para destacar o texto rosa */
+            background: white;
+            padding: 40px 30px 20px 30px;
+            text-align: center;
+            border-bottom: 2px solid #fff0f5;
+        }
+
+        .logo {
+            font-size: 3rem;
+            font-family: 'Dancing Script', cursive;
+            margin-bottom: 5px;
+            color: #c44569; /* Cor rosa escuro da marca */
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .logo span {
+            color: #ff6b9d; /* Rosa mais claro */
+        }
+
+        .login-subtitle {
+            font-size: 1rem;
+            color: #666;
+            margin-top: 5px;
+        }
+
+        .login-body {
+            padding: 30px 30px 40px 30px;
+        }
+
+        .alert {
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .alert-danger {
+            background: #fff0f3;
+            color: #c44569;
+            border: 1px solid #ffcdd2;
+        }
+
+        .alert-success {
+            background: #e8f5e9;
+            color: #2e7d32;
+            border: 1px solid #c8e6c9;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: #c44569; /* Títulos dos inputs em rosa escuro */
+            font-size: 0.95rem;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 14px 16px;
+            border: 2px solid #ffe0e9; /* Borda rosa bem clara */
+            border-radius: 12px;
+            font-size: 1rem;
+            transition: all 0.3s;
+            font-family: 'Poppins', sans-serif;
+            background-color: #fffbfd;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: #ff6b9d; /* Foco rosa vibrante */
+            box-shadow: 0 0 0 4px rgba(255, 107, 157, 0.1);
+            background-color: white;
+        }
+
+        .form-group input::placeholder {
+            color: #bbb;
+        }
+
+        .btn-submit {
+            width: 100%;
+            padding: 15px;
+            /* Gradiente idêntico ao da Home */
+            background: linear-gradient(135deg, #ff6b9d 0%, #c44569 100%);
+            color: white;
+            border: none;
+            border-radius: 25px; /* Botão mais arredondado igual "Ver Detalhes" */
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+            font-family: 'Poppins', sans-serif;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .btn-submit:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(196, 69, 105, 0.4);
+        }
+
+        .btn-submit:active {
+            transform: translateY(0);
+        }
+
+        .login-footer {
+            text-align: center;
+            padding: 20px;
+            background: #fff0f5; /* Fundo rodapé levemente rosado */
+            font-size: 0.85rem;
+            color: #c44569;
+            font-weight: 500;
+        }
+
+        /* Ícones dentro dos inputs (opcional, ajuste fino de layout) */
+        .input-icon-wrapper {
+            position: relative;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="login-container">
+        <div class="login-header">
+            <h1 class="logo">Nêga <span>Biju</span></h1>
+            <p class="login-subtitle">✨ Bem-vinda de volta! ✨</p>
+        </div>
+
+        <div class="login-body">
+            #{if flash.error}
+            <div class="alert alert-danger">
+                <i class='bx bx-error-circle'></i>
+                <span>${flash.error}</span>
+            </div>
+            #{/if}
+
+            #{if flash.success}
+            <div class="alert alert-success">
+                <i class='bx bx-check-circle'></i>
+                <span>${flash.success}</span>
+            </div>
+            #{/if}
+
+            <form action="@{Logins.logar}" method="POST">
+                <div class="form-group">
+                    <label for="login">
+                        <i class='bx bx-user'></i> Usuário
+                    </label>
+                    <input type="text" id="login" name="login" required placeholder="Digite seu login">
+                </div>
+                
+                <div class="form-group">
+                    <label for="senha">
+                        <i class='bx bx-lock-alt'></i> Senha
+                    </label>
+                    <input type="password" id="senha" name="senha" required placeholder="Digite sua senha">
+                </div>
+
+                <button type="submit" class="btn-submit">
+                    <i class='bx bx-heart'></i> Entrar
+                </button>
+            </form>
+        </div>
+
+        <div class="login-footer">
+            Nêga Biju © 2024 - Feito com carinho
+        </div>
+    </div>
+
+</body>
+</html>

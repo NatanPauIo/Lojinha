@@ -1,0 +1,20 @@
+#{extends 'main.html' /}
+#{set title:'Detalhes da Pessoa' /}
+
+<link rel="stylesheet" href="@{'/public/stylesheets/listar.css'}">
+
+<div class="detalhar">
+    <h1>Detalhes da Pessoa</h1>
+    
+    <div class="detalhes-card">
+        <p><strong>Nome:</strong> ${pessoa.nome}</p>
+        <p><strong>Email:</strong> ${pessoa.email}</p>
+        <p><strong>Login:</strong> ${pessoa.login}</p>
+        <p><strong>Status:</strong> ${pessoa.status}</p>
+    </div>
+
+    <div class="acoes">
+        <a href="@{Pessoas.editar(pessoa.id)}" class="btn-editar">Editar</a>
+        <a href="@{Pessoas.listar}" class="btn-voltar">Voltar para Lista</a>
+    </div>
+</div>

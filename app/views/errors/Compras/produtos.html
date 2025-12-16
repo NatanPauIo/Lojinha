@@ -1,0 +1,36 @@
+#{extends 'main.html' /}
+#{set title:'Nega Biju' /}
+
+
+<link rel="stylesheet" media="screen" href="@{'/public/stylesheets/produtos.css'}">
+
+
+<div class="container">
+    <div class="title-container">
+        <h1 class="page-title">Nossos Produtos</h1>
+    </div>
+	
+	
+    <div class="product-grid">
+        #{list items:produtos, as:'item'}
+        <a href="@{Compras.detalharproduto(item.id)}" class="product-link">
+            <div class="product-card">
+                <div class="image-container">
+                    <img src="${item.foto}" alt="${item.nome}">
+                </div>
+                <div class="card-content">
+                    <h3 class="product-name">${item.nome}</h3>
+                    <p class="product-description">${item.descricao}</p>
+                    <p class="product-price">R$ ${item.preco.format('###,##0.00')}</p>
+                </div>
+                
+            </div>
+          </a>
+        #{/list}
+         
+        #{else}
+            <p>Não há produtos cadastrados.</p>
+        #{/else}
+    </div> </div> ```
+
+	

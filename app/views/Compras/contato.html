@@ -1,0 +1,194 @@
+#{extends 'main.html' /}
+#{set title:'Contato' /}
+
+<style>
+    .container {
+        max-width: 1200px;
+        margin: 40px auto;
+        padding: 20px;
+    }
+
+    .page-title {
+        text-align: center;
+        font-size: 2.5rem;
+        color: #c44569;
+        margin-bottom: 50px;
+        font-weight: 700;
+    }
+
+    .contact-wrapper {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 40px;
+        background: white;
+        padding: 40px;
+        border-radius: 20px;
+        box-shadow: 0 10px 40px rgba(196, 69, 105, 0.15);
+    }
+
+    .contact-info h2 {
+        color: #c44569;
+        margin-bottom: 20px;
+        font-size: 1.8rem;
+    }
+
+    .contact-info p {
+        color: #666;
+        line-height: 1.8;
+        margin-bottom: 30px;
+    }
+
+    .contact-details {
+        list-style: none;
+    }
+
+    .contact-details li {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        margin-bottom: 20px;
+        padding: 15px;
+        background: #fef5f8;
+        border-radius: 10px;
+        transition: all 0.3s;
+    }
+
+    .contact-details li:hover {
+        background: #ffe0ec;
+        transform: translateX(5px);
+    }
+
+    .contact-details i {
+        font-size: 1.8rem;
+        color: #ff6b9d;
+    }
+
+    .contact-details a {
+        color: #c44569;
+        text-decoration: none;
+        font-weight: 500;
+    }
+
+    .contact-form-container h2 {
+        color: #c44569;
+        margin-bottom: 25px;
+        font-size: 1.8rem;
+    }
+
+    .form-group {
+        margin-bottom: 20px;
+    }
+
+    .form-group label {
+        display: block;
+        margin-bottom: 8px;
+        font-weight: 600;
+        color: #555;
+    }
+
+    .form-group input,
+    .form-group textarea {
+        width: 100%;
+        padding: 12px 15px;
+        border: 2px solid #ffe0ec;
+        border-radius: 10px;
+        font-family: 'Poppins', sans-serif;
+        font-size: 1rem;
+        transition: all 0.3s;
+    }
+
+    .form-group input:focus,
+    .form-group textarea:focus {
+        outline: none;
+        border-color: #ff6b9d;
+        box-shadow: 0 0 0 3px rgba(255, 107, 157, 0.1);
+    }
+
+    .form-group textarea {
+        resize: vertical;
+        min-height: 120px;
+    }
+
+    .btn-submit {
+        width: 100%;
+        padding: 15px;
+        background: linear-gradient(135deg, #ff6b9d 0%, #c44569 100%);
+        color: white;
+        border: none;
+        border-radius: 10px;
+        font-size: 1.1rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s;
+        font-family: 'Poppins', sans-serif;
+    }
+
+    .btn-submit:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 10px 25px rgba(255, 107, 157, 0.3);
+    }
+
+    @media (max-width: 768px) {
+        .contact-wrapper {
+            grid-template-columns: 1fr;
+        }
+    }
+</style>
+
+<div class="container">
+    <h1 class="page-title">
+        <i class='bx bx-envelope'></i> Entre em Contato
+    </h1>
+
+    <div class="contact-wrapper">
+        <div class="contact-info">
+            <h2>Fale Conosco</h2>
+            <p>Tem alguma dúvida, sugestão ou quer fazer uma encomenda? Estamos  disposníveis!</p>
+
+            <ul class="contact-details">
+                <li>
+                    <i class='bx bxl-whatsapp'></i>
+                    <a href="https://wa.me/5584999999999" target="_blank">(84) 99999-9999</a>
+                </li>
+                <li>
+                    <i class='bx bx-envelope'></i>
+                    <a href="mailto:contato@negabiju.com.br">contato@negabiju.com.br</a>
+                </li>
+                <li>
+                    <i class='bx bxl-instagram'></i>
+                    <a href="https://instagram.com/negabiju.acessorios2" target="_blank">@negabiju.acessorios2</a>
+                </li>
+            </ul>
+        </div>
+
+        <div class="contact-form-container">
+            <h2>Envie uma Mensagem</h2>
+
+            <form action="#" method="POST">
+                <div class="form-group">
+                    <label>Seu nome</label>
+                    <input type="text" name="nome" required placeholder="Digite seu nome">
+                </div>
+
+                <div class="form-group">
+                    <label>Seu e-mail</label>
+                    <input type="email" name="email" required placeholder="seuemail@exemplo.com">
+                </div>
+
+                <div class="form-group">
+                    <label>Assunto</label>
+                    <input type="text" name="assunto" required placeholder="Sobre o que deseja falar?">
+                </div>
+
+                <div class="form-group">
+                    <label>Sua mensagem</label>
+                    <textarea name="mensagem" required placeholder="Escreva sua mensagem aqui..."></textarea>
+                </div>
+
+                <button type="submit" class="btn-submit">
+                    <i class='bx bx-send'></i> Enviar Mensagem
+                </button>
+            </form>
+        </div>
+    </div>
+</div>

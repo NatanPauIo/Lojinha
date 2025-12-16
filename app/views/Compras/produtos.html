@@ -1,0 +1,33 @@
+#{extends 'main.html' /}
+#{set title:'Nossos Produtos' /}
+
+<link rel="stylesheet" href="@{'/public/stylesheets/produtos.css'}">
+
+<div class="container">
+    <div class="title-container">
+        <h1 class="page-title">Nossos Produtos</h1>
+    </div>
+
+    <div class="product-grid">
+        #{list items:produtos, as:'p'}
+            <a href="@{Compras.detalharproduto(p.id)}" class="product-link">
+                <div class="product-card">
+                    <div class="image-container">
+                        <img src="${p.foto}" alt="${p.nome}">
+                    </div>
+
+                    <div class="card-content">
+                        <h3 class="product-name">${p.nome}</h3>
+                        <p class="product-description">${p.descricao}</p>
+                        <p class="product-price">
+                            R$ ${p.preco.format('###,##0.00')}
+                        </p>
+                    </div>
+                </div>
+            </a>
+        #{/list}
+        #{else}
+            <p>Nenhum produto cadastrado.</p>
+        #{/else}
+    </div>
+</div>

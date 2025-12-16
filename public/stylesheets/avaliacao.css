@@ -1,0 +1,169 @@
+  body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f9f9f9;
+            color: #333;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 40px auto;
+            padding: 20px;
+        }
+
+        .title-container {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .page-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 3em;
+            font-weight: 500;
+            color: #222;
+        }
+
+        /* Lista de avaliações */
+        .reviews-list {
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 5px 25px rgba(0, 0, 0, 0.07);
+            overflow: hidden;
+        }
+
+        /* Card individual de cada avaliação */
+        .review-card {
+            padding: 25px 30px;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 20px;
+        }
+        
+        /* Remove a borda do último item */
+        .reviews-list .review-card:last-child {
+            border-bottom: none;
+        }
+
+        .review-content {
+            flex-grow: 1;
+        }
+
+        .review-author {
+            font-size: 1.2em;
+            font-weight: 500;
+            color: #333;
+            margin: 0 0 10px 0;
+            display: flex;
+            align-items: center;
+        }
+        
+        .review-author .bx {
+            font-size: 1.3em;
+            margin-right: 8px;
+            color: #d13670;
+        }
+
+        .review-text {
+            margin: 0;
+            font-size: 1em;
+            color: #555;
+            line-height: 1.6;
+            padding-left: 5px;
+            border-left: 3px solid #e7c0a8;
+        }
+
+        /* Botões de Ação */
+        .review-actions {
+            display: flex;
+            gap: 15px;
+            padding-top: 5px;
+        }
+
+        .review-actions a {
+            text-decoration: none;
+            color: #888;
+            font-size: 1.2em;
+            transition: color 0.3s ease;
+        }
+        
+        .btn-edit:hover {
+            color: #5a8dee; /* Azul para editar */
+        }
+        
+        .btn-delete:hover {
+            color: #e63946; /* Vermelho para excluir */
+        }
+        
+        .review-author {
+    font-size: 1.2em;
+    font-weight: 500;
+    color: #333;
+    /* Removido o margin-bottom para controlar o espaço com o novo elemento */
+    margin: 0; 
+    display: flex;
+    align-items: center;
+}
+
+/* NOVO ESTILO PARA O PRODUTO AVALIADO */
+.reviewed-product {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.9em;
+    color: #666;
+    background-color: #f9f9f9;
+    padding: 5px 10px;
+    border-radius: 5px;
+    margin-top: 10px;
+    margin-bottom: 15px;
+}
+
+.reviewed-product .bx {
+    font-size: 1.2em;
+    color: #333;
+}
+/* FIM DO NOVO ESTILO */
+
+.review-text {
+    margin: 0;
+    font-size: 1em;
+    color: #555;
+    line-height: 1.6;
+    padding-left: 5px;
+    border-left: 3px solid #e7c0a8;
+}
+
+.search-container {
+            margin-bottom: 40px;
+        }
+        .search-form {
+            display: flex;
+            gap: 10px;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        .search-input {
+            flex-grow: 1;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 50px;
+            font-size: 1em;
+        }
+        .search-input:focus {
+            outline: none;
+            border-color: #d13670;
+        }
+        .search-button {
+            border: none;
+            background-color: #d13670;
+            color: #fff;
+            padding: 0 25px;
+            border-radius: 50px;
+            cursor: pointer;
+            font-size: 1.2em;
+            transition: background-color 0.3s ease;
+        }
+        .search-button:hover {
+            background-color: #b92d61;
+        }

@@ -1,0 +1,67 @@
+#{extends 'main.html' /}
+#{set title:'Cadastro de Pessoa' /}
+
+<link rel="stylesheet" href="@{'/public/stylesheets/form-pessoas.css'}">
+
+<div class="form-container">
+
+    <h1 class="titulo-form">
+        #{if pessoa?.id} 
+            Editar Pessoa 
+        #{/if}
+        #{else} 
+            Cadastrar Pessoa 
+        #{/else}
+    </h1>
+
+    <!-- EXIBE MENSAGENS DE ERRO -->
+    #{ifErrors}
+        <div class="erros-box">
+            <ul>
+                #{errors}
+                    <li>${error}</li>
+                #{/errors}
+            </ul>
+        </div>
+    #{/ifErrors}
+
+    <form action="@{Pessoas.salvar}" method="POST" class="form-pessoa">
+
+        <input type="hidden" name="pessoa.id" value="${pessoa?.id}">
+
+        <!-- NOME -->
+        <div class="grupo">
+            <label>Nome</label>
+            <input type="text" name="pessoa.nome" required value="${pessoa?.nome}">
+        </div>
+
+        <!-- EMAIL -->
+        <div class="grupo">
+            <label>Email</label>
+            <input type="email" name="pessoa.email" required value="${pessoa?.email}">
+        </div>
+
+        <!-- LOGIN -->
+        <div class="grupo">
+            <label>Login</label>
+            <input type="text" name="pessoa.login" required value="${pessoa?.login}">
+        </div>
+
+        <!-- SENHA -->
+        <div class="grupo">
+            <label>Senha</label>
+            <input type="password" name="pessoa.senha" required value="${pessoa?.senha}">
+        </div>
+
+        <div class="botoes">
+            <a href="@{Pessoas.listar}" class="btn-voltar">
+                <i class='bx bx-arrow-back'></i> Voltar
+            </a>
+
+            <button type="submit" class="btn-salvar">
+                <i class='bx bx-check-circle'></i> Salvar
+            </button>
+        </div>
+    </form>
+
+</div>

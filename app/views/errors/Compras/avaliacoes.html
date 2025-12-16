@@ -1,0 +1,39 @@
+#{extends 'main.html' /}
+#{set title:'Nega Biju' /}
+
+
+<link rel="stylesheet" media="screen" href="@{'/public/stylesheets/avaliacao.css'}">
+
+<div class="container">
+        <div class="title-container">
+            <h1 class="page-title">Avaliações de Clientes</h1>
+        </div>
+ <div class="search-container">
+            <form action="@{Compras.avaliacoes}" method="GET" class="search-form">
+                <input type="text" name="busca" class="search-input" placeholder="Pesquisar por nome ou mensagem..." value="${busca}">
+                <button type="submit" class="search-button"><i class='bx bx-search'></i></button>
+            </form>
+        </div>
+
+<div class="reviews-list">
+    #{list items:avaliacao, as:'item'}
+        <div class="review-card">
+            <div class="review-content">
+                <h3 class="review-author"><i class='bx bxs-user-circle'></i>${item.usuario}</h3>
+                
+                <div class="reviewed-product">
+                    <i class='bx bxs-shopping-bag'></i>
+                    <span>Avaliou o produto: <strong>${item.produto.nome}</strong></span>
+                </div>
+                <p class="review-text">${item.mensagem}</p>
+            </div>
+            <div class="review-actions">
+                <a href="@{Compras.editaravaliacao(item.id)}" class="btn-edit" title="Editar"><i class='bx bxs-edit'></i></a>
+                <a href="@{Compras.deletar(item.id)}" class="btn-delete" title="Excluir"><i class='bx bxs-trash'></i></a>
+            </div>
+       
+        </div>
+    #{/list}
+</div>
+</div>
+	

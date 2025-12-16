@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>#{get 'title' /}</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@300;400;500;700&display=swap" rel="stylesheet">
+
+    <!-- BoxIcons -->
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+
+    <!-- Ícone -->
+    <link rel="shortcut icon" type="image/png" href="@{'/public/images/negabijulogo.jpg'}">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: #fef5f8;
+            color: #333;
+        }
+
+        /* ALERTAS */
+        .alert {
+            padding: 15px 20px;
+            margin: 20px;
+            border-radius: 10px;
+            font-size: 0.95rem;
+            animation: slideDown 0.3s ease;
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .alert-danger {
+            background: #ffe0e0;
+            color: #c44569;
+            border-left: 4px solid #c44569;
+        }
+
+        .alert-success {
+            background: #e0ffe0;
+            color: #28a745;
+            border-left: 4px solid #28a745;
+        }
+
+        .alert strong {
+            font-weight: 600;
+        }
+
+        /* HEADER */
+        .header {
+            background: linear-gradient(135deg, #ff6b9d 0%, #c44569 100%);
+            padding: 20px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 20px rgba(196, 69, 105, 0.3);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .logo {
+            font-size: 2rem;
+            font-family: 'Dancing Script', cursive;
+            color: white;
+            text-decoration: none;
+            font-weight: 700;
+            transition: all 0.3s;
+        }
+
+        .logo:hover {
+            transform: scale(1.05);
+        }
+
+        .logo span {
+            color: #ffd700;
+        }
+
+        nav {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+
+        .nav-links li a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 1rem;
+            padding: 8px 15px;
+            border-radius: 8px;
+            transition: all 0.3s;
+        }
+
+        .nav-links li a:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+        }
+
+        .user-info {
+            color: white;
+            font-size: 0.95rem;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .logout-link {
+            color: #ffd700;
+            text-decoration: none;
+            font-weight: 600;
+            padding: 6px 15px;
+            border: 2px solid #ffd700;
+            border-radius: 20px;
+            transition: all 0.3s;
+        }
+
+        .logout-link:hover {
+            background: #ffd700;
+            color: #c44569;
+        }
+
+        .cart-icon {
+            color: white;
+            font-size: 1.8rem;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .cart-icon:hover {
+            transform: scale(1.1);
+            color: #ffd700;
+        }
+
+        /* CONTENT */
+        .content {
+            min-height: calc(100vh - 200px);
+        }
+
+        /* RESPONSIVO */
+        @media (max-width: 768px) {
+            .header {
+                flex-direction: column;
+                gap: 15px;
+                padding: 15px 20px;
+            }
+
+            .nav-links {
+                flex-direction: column;
+                gap: 10px;
+                text-align: center;
+            }
+
+            .user-info {
+                flex-direction: column;
+                gap: 10px;
+            }
+        }
+    </style>
+
+    #{get 'moreStyles' /}
+</head>
+
+<body>
+
+#{if flash.error}
+<div class="alert alert-danger">
+    <strong><i class='bx bx-error-circle'></i> Erro:</strong> ${flash.error}
+</div>
+#{/if}
+
+#{if flash.success}
+<div class="alert alert-success">
+    <strong><i class='bx bx-check-circle'></i> Sucesso!</strong> ${flash.success}
+</div>
+#{/if}
+
+<header class="header">
+    <a href="@{Compras.principal}" class="logo">Nêga <span>Biju</span></a>
+
+    <nav>
+        <ul class="nav-links">
+            <li><a href="@{Compras.principal}"><i class='bx bx-home'></i> Início</a></li>
+            <li><a href="@{Compras.produtos}"><i class='bx bx-shopping-bag'></i> Produtos</a></li>
+            <li><a href="@{Compras.avaliacoes}"><i class='bx bx-star'></i> Avaliações</a></li>
+            <li><a href="@{Compras.contato}"><i class='bx bx-envelope'></i> Contato</a></li>
+            <li><a href="@{Pessoas.listar}"><i class='bx bx-group'></i> Pessoas</a></li>
+        </ul>
+    </nav>
+
+    #{if session['usuarioLogado']}
+    <div class="user-info">
+        <span><i class='bx bx-user-circle'></i> ${session['usuarioNome'] ?: session['usuarioLogado']}</span>
+        <a class="logout-link" href="@{Logins.logout}">
+            <i class='bx bx-log-out'></i> Sair
+        </a>
+    </div>
+    #{/if}
+
+    <div class="cart-icon">
+        <i class='bx bx-cart'></i>
+    </div>
+</header>
+
+<main class="content">
+    #{doLayout /}
+</main>
+
+<!-- jQuery -->
+<script src="@{'/public/javascripts/jquery-1.6.4.min.js'}"></script>
+#{get 'moreScripts' /}
+
+</body>
+</html>

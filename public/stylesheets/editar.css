@@ -1,0 +1,152 @@
+ body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f9f9f9;
+            color: #333;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 40px auto;
+            padding: 20px;
+        }
+
+        /* --- Seção de Detalhes do Produto --- */
+        .product-detail-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            background-color: #fff;
+            padding: 40px;
+            border-radius: 8px;
+            margin-bottom: 50px;
+        }
+
+        .product-image-section img {
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+            border: 1px solid #eee;
+        }
+
+        .product-info-section .product-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2.8em;
+            font-weight: 700;
+            margin: 0 0 15px 0;
+        }
+
+        .product-info-section .product-price {
+            font-size: 2em;
+            font-weight: 500;
+            color: #d13670;
+            margin-bottom: 25px;
+        }
+
+        .product-info-section .product-description {
+            font-size: 1em;
+            line-height: 1.7;
+            color: #555;
+            margin-bottom: 30px;
+        }
+
+        .btn-add-to-cart {
+            display: inline-block;
+            background-color: #d13670;
+            color: #fff;
+            padding: 15px 40px;
+            text-decoration: none;
+            font-size: 1.1em;
+            font-weight: 500;
+            border-radius: 50px;
+            transition: background-color 0.3s ease;
+        }
+        
+        .btn-add-to-cart:hover {
+            background-color: #b92d61;
+        }
+
+
+        /* --- Seção de Avaliações --- */
+        .reviews-section {
+            padding-top: 30px;
+            border-top: 1px solid #eee;
+        }
+
+        .reviews-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2.2em;
+            font-weight: 500;
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        
+        /* Reutilizando o estilo da lista de avaliações */
+        .reviews-list {
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 5px 25px rgba(0, 0, 0, 0.07);
+            overflow: hidden;
+        }
+        .review-card {
+            padding: 25px 30px;
+            border-bottom: 1px solid #eee;
+        }
+        .reviews-list .review-card:last-child { border-bottom: none; }
+        .review-author { font-size: 1.2em; font-weight: 500; margin: 0 0 10px 0; display: flex; align-items: center; }
+        .review-author .bx { font-size: 1.3em; margin-right: 8px; color: #d13670; }
+        .review-text { margin: 0; font-size: 1em; color: #555; line-height: 1.6; }
+        .no-reviews { text-align: center; color: #777; font-style: italic; }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f9f9f9;
+            color: #333;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 40px auto;
+            padding: 20px;
+        }
+
+        /* --- Seção de Detalhes do Produto --- */
+        .product-detail-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            background-color: #fff;
+            padding: 40px;
+            border-radius: 8px;
+            margin-bottom: 50px;
+        }
+        .product-image-section img { width: 100%; height: auto; border-radius: 8px; border: 1px solid #eee; }
+        .product-info-section .product-title { font-family: 'Cormorant Garamond', serif; font-size: 2.8em; font-weight: 700; margin: 0 0 15px 0; }
+        .product-info-section .product-price { font-size: 2em; font-weight: 500; color: #d13670; margin-bottom: 25px; }
+        .product-info-section .product-description { font-size: 1em; line-height: 1.7; color: #555; margin-bottom: 30px; }
+        .btn-add-to-cart { display: inline-block; background-color: #d13670; color: #fff; padding: 15px 40px; text-decoration: none; font-size: 1.1em; font-weight: 500; border-radius: 50px; transition: background-color 0.3s ease; }
+        .btn-add-to-cart:hover { background-color: #b92d61; }
+
+        /* --- Seção de Avaliações --- */
+        .reviews-section, .new-review-section {
+            padding-top: 30px;
+            margin-top: 50px;
+            border-top: 1px solid #eee;
+        }
+        .section-title { font-family: 'Cormorant Garamond', serif; font-size: 2.2em; font-weight: 500; text-align: center; margin-bottom: 40px; }
+        .reviews-list { background-color: #fff; border-radius: 8px; box-shadow: 0 5px 25px rgba(0, 0, 0, 0.07); overflow: hidden; }
+        .review-card { padding: 25px 30px; border-bottom: 1px solid #eee; }
+        .reviews-list .review-card:last-child { border-bottom: none; }
+        .review-author { font-size: 1.2em; font-weight: 500; margin: 0 0 10px 0; display: flex; align-items: center; }
+        .review-author .bx { font-size: 1.3em; margin-right: 8px; color: #d13670; }
+        .review-text { margin: 0; font-size: 1em; color: #555; line-height: 1.6; }
+        .no-reviews { text-align: center; color: #777; font-style: italic; }
+
+        /* --- Estilos para o Formulário de Nova Avaliação --- */
+        .review-form { background-color: #fff; padding: 30px 40px; border-radius: 8px; max-width: 700px; margin: 0 auto; box-shadow: 0 5px 25px rgba(0, 0, 0, 0.07); }
+        .form-group { margin-bottom: 20px; }
+        .form-group label { display: block; font-weight: 500; margin-bottom: 8px; color: #333; }
+        .form-group input[type="text"], .form-group textarea { width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 5px; font-family: 'Poppins', sans-serif; font-size: 1em; }
+        .form-group textarea { resize: vertical; min-height: 120px; }
+        .btn-submit { background-color: #d13670; color: #fff; border: none; padding: 12px 30px; font-size: 1em; font-weight: 500; border-radius: 50px; cursor: pointer; transition: background-color 0.3s ease; }
+        .btn-submit:hover { background-color: #b92d61; }
+        .form-actions { text-align: center; }

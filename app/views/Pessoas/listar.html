@@ -1,0 +1,309 @@
+#{extends 'main.html' /}
+#{set title:'Listagem de Pessoas' /}
+
+<style>
+    .container-lista {
+        max-width: 1200px;
+        margin: 40px auto;
+        padding: 20px;
+    }
+
+    .titulo-lista {
+        font-size: 2.5rem;
+        color: #c44569;
+        margin-bottom: 30px;
+        text-align: center;
+        font-weight: 700;
+    }
+
+    .form-busca {
+        background: white;
+        padding: 30px;
+        border-radius: 15px;
+        box-shadow: 0 5px 20px rgba(196, 69, 105, 0.1);
+        margin-bottom: 30px;
+    }
+
+    .form-busca label {
+        display: block;
+        font-weight: 600;
+        color: #c44569;
+        margin-bottom: 10px;
+        font-size: 1rem;
+    }
+
+    .form-busca input {
+        width: 100%;
+        padding: 15px 20px;
+        border: 2px solid #ffe0ec;
+        border-radius: 10px;
+        font-size: 1rem;
+        transition: all 0.3s;
+        font-family: 'Poppins', sans-serif;
+    }
+
+    .form-busca input:focus {
+        outline: none;
+        border-color: #ff6b9d;
+        box-shadow: 0 0 0 3px rgba(255, 107, 157, 0.1);
+    }
+
+    .lista-pessoas {
+        list-style: none;
+        padding: 0;
+    }
+
+    .lista-pessoas li {
+        background: white;
+        padding: 20px 25px;
+        margin-bottom: 15px;
+        border-radius: 12px;
+        box-shadow: 0 3px 15px rgba(196, 69, 105, 0.08);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        transition: all 0.3s;
+    }
+
+    .lista-pessoas li:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 8px 25px rgba(196, 69, 105, 0.15);
+    }
+
+    .lista-pessoas strong {
+        color: #ff6b9d;
+        font-size: 1.1rem;
+        font-weight: 600;
+    }
+
+    .lista-pessoas .pessoa-info {
+        flex: 1;
+    }
+
+    .lista-pessoas .pessoa-acoes {
+        display: flex;
+        gap: 10px;
+    }
+
+    .lista-pessoas a {
+        padding: 8px 16px;
+        border-radius: 8px;
+        text-decoration: none;
+        font-weight: 500;
+        font-size: 0.9rem;
+        transition: all 0.3s;
+        display: inline-flex;
+        align-items: center;
+        gap: 5px;
+    }
+
+    .lista-pessoas a:first-of-type {
+        background: #ff6b9d;
+        color: white;
+    }
+
+    .lista-pessoas a:first-of-type:hover {
+        background: #ff5a8c;
+        transform: translateY(-2px);
+    }
+
+    .lista-pessoas a:last-of-type {
+        background: #c44569;
+        color: white;
+    }
+
+    .lista-pessoas a:last-of-type:hover {
+        background: #b33558;
+        transform: translateY(-2px);
+    }
+
+    .btn-cadastrar {
+        display: inline-block;
+        padding: 15px 30px;
+        background: linear-gradient(135deg, #ff6b9d 0%, #c44569 100%);
+        color: white;
+        text-decoration: none;
+        border-radius: 12px;
+        font-weight: 600;
+        font-size: 1rem;
+        transition: all 0.3s;
+        box-shadow: 0 5px 20px rgba(255, 107, 157, 0.3);
+        margin-top: 20px;
+    }
+
+    .btn-cadastrar:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 8px 30px rgba(255, 107, 157, 0.4);
+    }
+
+    .btn-cadastrar i {
+        margin-right: 8px;
+    }
+
+    .loading {
+        text-align: center;
+        padding: 20px;
+        color: #ff6b9d;
+        font-style: italic;
+    }
+
+    .empty-state {
+        text-align: center;
+        padding: 60px 20px;
+        background: white;
+        border-radius: 15px;
+        box-shadow: 0 5px 20px rgba(196, 69, 105, 0.1);
+    }
+
+    .empty-state i {
+        font-size: 4rem;
+        color: #ffc0cb;
+        margin-bottom: 20px;
+    }
+
+    .empty-state p {
+        color: #999;
+        font-size: 1.1rem;
+    }
+
+    @media (max-width: 768px) {
+        .lista-pessoas li {
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 15px;
+        }
+
+        .lista-pessoas .pessoa-acoes {
+            width: 100%;
+            justify-content: flex-end;
+        }
+    }
+</style>
+
+<div class="container-lista">
+
+    <h1 class="titulo-lista">
+        <i class='bx bx-group'></i> Listagem de Pessoas
+    </h1>
+
+    <form id="buscarPessoas" class="form-busca">
+        <label>
+            <i class='bx bx-search'></i> Buscar por nome ou email:
+        </label>
+        <input type="text" id="campoBusca" name="termo" placeholder="Digite para buscar em tempo real...">
+    </form>
+
+    <!-- LISTA ORIGINAL (exibida quando não há busca) -->
+    <ul id="listaOriginal" class="lista-pessoas">
+        #{list items:pessoas, as:'p'}
+            <li>
+                <div class="pessoa-info">
+                    <strong>${p.nome}</strong>
+                    <span style="color: #666; margin-left: 10px;">${p.email}</span>
+                </div>
+                <div class="pessoa-acoes">
+                    <a href="@{Pessoas.editar(p.id)}">
+                        <i class='bx bx-edit'></i> Editar
+                    </a>
+                    <a href="@{Pessoas.remover(p.id)}" onclick="return confirm('Deseja realmente remover ${p.nome}?')">
+                        <i class='bx bx-trash'></i> Remover
+                    </a>
+                </div>
+            </li>
+        #{/list}
+        #{else}
+            <li class="empty-state">
+                <i class='bx bx-user-x'></i>
+                <p>Nenhuma pessoa cadastrada.</p>
+            </li>
+        #{/else}
+    </ul>
+
+    <!-- LISTA AJAX (exibida durante busca) -->
+    <ul id="resultado" class="lista-pessoas" style="display:none;"></ul>
+
+    <a class="btn-cadastrar" href="@{Pessoas.form}">
+        <i class='bx bx-plus-circle'></i> Cadastrar Nova Pessoa
+    </a>
+
+</div>
+
+<script type="text/javascript">
+$(document).ready(function () {
+
+    // Evento de digitação no campo de busca
+    $("#campoBusca").on("keyup", function () {
+
+        let termo = $(this).val().trim();
+
+        // Se o campo estiver vazio, mostra lista original
+        if (termo === "") {
+            $("#resultado").hide();
+            $("#listaOriginal").show();
+            return;
+        }
+
+        // Requisição AJAX
+        $.ajax({
+            type: "GET",
+            url: "@{Pessoas.listarAjax()}",
+            data: { termo: termo },
+            
+            beforeSend: function() {
+                $("#listaOriginal").hide();
+                $("#resultado").html('<li class="loading"><i class="bx bx-loader-alt bx-spin"></i> Buscando...</li>').show();
+            },
+            
+            success: function (data) {
+                // Limpa resultados
+                $("#resultado").empty().show();
+
+                // Verifica se retornou resultados
+                if (data.length === 0) {
+                    $("#resultado").html(
+                        '<li class="empty-state">' +
+                            '<i class="bx bx-search-alt"></i>' +
+                            '<p>Nenhum resultado encontrado para "' + termo + '".</p>' +
+                        '</li>'
+                    );
+                } else {
+                    // Monta a lista com os resultados
+                    $.each(data, function (i, item) {
+                        // Cria URLs dinâmicas
+                        let editarURL = "@{Pessoas.editar(':id')}".replace(":id", item.id);
+                        let removerURL = "@{Pessoas.remover(':id')}".replace(":id", item.id);
+
+                        $("#resultado").append(
+                            '<li>' +
+                                '<div class="pessoa-info">' +
+                                    '<strong>' + item.nome + '</strong>' +
+                                    '<span style="color: #666; margin-left: 10px;">' + item.email + '</span>' +
+                                '</div>' +
+                                '<div class="pessoa-acoes">' +
+                                    '<a href="' + editarURL + '">' +
+                                        '<i class="bx bx-edit"></i> Editar' +
+                                    '</a>' +
+                                    '<a href="' + removerURL + '" onclick="return confirm(\'Deseja realmente remover ' + item.nome + '?\')">' +
+                                        '<i class="bx bx-trash"></i> Remover' +
+                                    '</a>' +
+                                '</div>' +
+                            '</li>'
+                        );
+                    });
+                }
+            },
+            
+            error: function() {
+                $("#resultado").html(
+                    '<li class="empty-state">' +
+                        '<i class="bx bx-error"></i>' +
+                        '<p>Erro ao buscar pessoas. Tente novamente.</p>' +
+                    '</li>'
+                ).show();
+            }
+        });
+
+    });
+
+});
+</script>
